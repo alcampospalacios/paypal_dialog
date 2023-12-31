@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
 
+import com.alcampospalacios.paypal_dialog.models.PaypalOrder;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
@@ -28,7 +29,7 @@ public class BottomSheetLibrary {
     static List<String> expandableListTitle;
     static HashMap<String, List<String>> expandableListDetail;
 
-    public static void showBottomSheet(Context context, String orderStatus, String orderNumber) {
+    public static void showBottomSheet(Context context, String orderNumber) {
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context,  R.style.FullScreenBottomSheetDialog);
         BottomSheetBehavior<View> bottomSheetBehavior;
         View view = LayoutInflater.from(context).inflate(R.layout.bottom_sheet_layout, null);
@@ -41,20 +42,27 @@ public class BottomSheetLibrary {
 
         // Texto "Orden completada"
         TextView completedText = view.findViewById(R.id.completedText);
-        completedText.setText(orderStatus);
+        completedText.setText(context.getString(R.string.order_approved));
         completedText.setTextColor(ContextCompat.getColor(context, R.color.order_complete_color));
 
         // Texto "Número de orden: xxx"
         TextView orderNumberText = view.findViewById(R.id.orderNumberText);
-        orderNumberText.setText("Order number: " + orderNumber);
+        orderNumberText.setText(String.format("%s%s", context.getString(R.string.order_number), orderNumber));
         orderNumberText.setTextColor(ContextCompat.getColor(context, R.color.order_number_color));
+
+        // Text order and delivery
+        TextView orderText = view.findViewById(R.id.orderText001);
+        orderText.setText(context.getString(R.string.order));
+        TextView deliveryText = view.findViewById(R.id.deliveryText001);
+        deliveryText.setText(context.getString(R.string.delivery));
 
         // Botones Pagar y Cancelar
         Button payButton = view.findViewById(R.id.payButton);
+        payButton.setText(context.getString(R.string.pay_button));
         Button cancelButton = view.findViewById(R.id.cancelButton);
+        cancelButton.setText(context.getString(R.string.cancel_button));
 
         // Configurar los eventos de clic o cualquier otra personalización necesaria para los botones
-
         bottomSheetDialog.setContentView(view);
 
         // behavior
@@ -67,7 +75,7 @@ public class BottomSheetLibrary {
 
 //       ************************************** List tile ***********************************
         expandableListView = (ExpandableListView) view.findViewById(R.id.expandableListView);
-        expandableListDetail = ExpandableListDataItems.getData();
+        expandableListDetail = ExpandableListDataItems.getData(context);
         expandableListTitle = new ArrayList<String>(expandableListDetail.keySet());
         expandableListAdapter = new CustomExpandableListAdapter(context, expandableListTitle, expandableListDetail);
         expandableListView.setAdapter(expandableListAdapter);
@@ -82,6 +90,7 @@ public class BottomSheetLibrary {
         });
 
         expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
+
             @Override
             public void onGroupCollapse(int groupPosition) {
                 Toast.makeText(context,

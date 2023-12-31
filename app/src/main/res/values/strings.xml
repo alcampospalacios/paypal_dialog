@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">paypal_dialog</string>
+    <string name="order_number">Order number:</string>
+    <string name="order_approved">Order approved!</string>
+    <string name="ordered_items">Ordered items</string>
+    <string name="order">Order</string>
+    <string name="delivery">Delivery</string>
+    <string name="summary">Summary</string>
+    <string name="pay_button">Pay</string>
+    <string name="cancel_button">Cancel</string>
+
 </resources>

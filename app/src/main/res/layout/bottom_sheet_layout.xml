@@ -70,19 +70,7 @@
             android:layoutDirection="rtl"
             />
 
-
-
-
-
-
-
-
-
-
-
 <!-- ************************************************************-->
-
-
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -96,11 +84,11 @@
 
         android:layout_marginTop="16dp">
         <TextView
+            android:id="@+id/orderText001"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="8dp"
-            android:text="Order"
             android:textSize="14sp" />
 
         <Space
@@ -125,11 +113,11 @@
 
         android:layout_marginTop="16dp">
         <TextView
+            android:id="@+id/deliveryText001"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="8dp"
-            android:text="Delivery"
             android:textSize="14sp" />
 
         <Space
