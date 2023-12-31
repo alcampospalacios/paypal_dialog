@@ -29,7 +29,7 @@ public class BottomSheetLibrary {
     static List<String> expandableListTitle;
     static HashMap<String, List<String>> expandableListDetail;
 
-    public static void showBottomSheet(Context context, String orderNumber) {
+    public static void showBottomSheet(Context context, String orderNumber, PaypalOrder paypalOrder) {
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context,  R.style.FullScreenBottomSheetDialog);
         BottomSheetBehavior<View> bottomSheetBehavior;
         View view = LayoutInflater.from(context).inflate(R.layout.bottom_sheet_layout, null);
@@ -53,8 +53,15 @@ public class BottomSheetLibrary {
         // Text order and delivery
         TextView orderText = view.findViewById(R.id.orderText001);
         orderText.setText(context.getString(R.string.order));
+
+        TextView orderValueText = view.findViewById(R.id.orderValue001);
+        orderValueText.setText(paypalOrder.getTotalValueOfItems());
+
         TextView deliveryText = view.findViewById(R.id.deliveryText001);
         deliveryText.setText(context.getString(R.string.delivery));
+
+        TextView deliveryValueText = view.findViewById(R.id.deliveryTextValue001);
+        deliveryValueText.setText(paypalOrder.getTotalShipping());
 
         // Botones Pagar y Cancelar
         Button payButton = view.findViewById(R.id.payButton);
@@ -75,7 +82,7 @@ public class BottomSheetLibrary {
 
 //       ************************************** List tile ***********************************
         expandableListView = (ExpandableListView) view.findViewById(R.id.expandableListView);
-        expandableListDetail = ExpandableListDataItems.getData(context);
+        expandableListDetail = ExpandableListDataItems.getData(context, paypalOrder.getPurchaseUnits());
         expandableListTitle = new ArrayList<String>(expandableListDetail.keySet());
         expandableListAdapter = new CustomExpandableListAdapter(context, expandableListTitle, expandableListDetail);
         expandableListView.setAdapter(expandableListAdapter);

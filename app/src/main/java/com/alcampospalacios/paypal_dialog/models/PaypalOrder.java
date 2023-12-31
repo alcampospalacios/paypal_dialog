@@ -27,4 +27,28 @@ public class PaypalOrder {
 
     public Link[] getLinks() { return links; }
     public void setLinks(Link[] value) { this.links = value; }
+
+    public String getTotalValueOfItems() {
+        double amount = 0.0;
+        for (PurchaseUnit purchaseUnit : purchaseUnits) {
+            if (purchaseUnit.getAmount().getBreakdown().existItemTotal()) {
+                amount += Double.parseDouble(purchaseUnit.getAmount().getBreakdown().getItemTotal().getValue());
+            }
+        }
+
+        return String.valueOf(amount);
+    }
+
+    public String getTotalShipping(){
+        double amount = 0.0;
+        for (PurchaseUnit purchaseUnit : purchaseUnits) {
+            if (purchaseUnit.getAmount().getBreakdown().existShipping()) {
+                amount += Double.parseDouble(purchaseUnit.getAmount().getBreakdown().getShipping().getValue());
+
+            }
+        }
+
+        return String.valueOf(amount);
+
+    }
 }
