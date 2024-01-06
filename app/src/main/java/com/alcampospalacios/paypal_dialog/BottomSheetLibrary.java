@@ -10,8 +10,8 @@ import android.widget.Button;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -45,7 +45,11 @@ public class BottomSheetLibrary {
     static List<String> expandableListTitle;
     static HashMap<String, List<String>> expandableListDetail;
 
+    // Listeners
+    static PaypalDialogListener listener;
+
     public static void showBottomSheet(
+            @NonNull PaypalDialogListener paypalDialogListener,
             @NonNull Context context,
             @NonNull String orderId,
             @NonNull PaypalOrder paypalOrder,
@@ -53,6 +57,8 @@ public class BottomSheetLibrary {
             @NonNull String paypalRequestId,
             @NonNull String url
             ) {
+        listener = paypalDialogListener;
+
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context,  R.style.FullScreenBottomSheetDialog);
         BottomSheetBehavior<View> bottomSheetBehavior;
         View view = LayoutInflater.from(context).inflate(R.layout.bottom_sheet_layout, null);
@@ -86,25 +92,49 @@ public class BottomSheetLibrary {
         TextView deliveryValueText = view.findViewById(R.id.deliveryTextValue001);
         deliveryValueText.setText(paypalOrder.getTotalShipping());
 
+        TextView summaryText = view.findViewById(R.id.summaryValue001);
+        summaryText.setText(paypalOrder.getTotal());
+
         // Botones Pagar y Cancelar
         Button payButton = view.findViewById(R.id.payButton);
         payButton.setText(context.getString(R.string.pay_button));
         Button cancelButton = view.findViewById(R.id.cancelButton);
         cancelButton.setText(context.getString(R.string.cancel_button));
 
+
+        LinearLayout layoutOfButtons = (LinearLayout) view.findViewById(R.id.layoutOfButtons001);
+
+        LinearLayout layoutOfLoading = (LinearLayout) view.findViewById(R.id.layoutOfLoading001);
+        layoutOfLoading.setVisibility(View.GONE);
+
+
         // Set an OnClickListener for the payButton
         payButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Code to be executed when the button is clicked
+
                 captureMoney(
                         accessToken,
                         paypalRequestId,
                         orderId,
-                        url
+                        url,
+                        layoutOfButtons,
+                        layoutOfLoading
                 );
             }
         });
+
+
+        // Set an OnClickListener for the cancelButton
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onCancelPayOrder();
+            }
+        });
+
+
 
         bottomSheetDialog.setContentView(view);
 
@@ -118,46 +148,30 @@ public class BottomSheetLibrary {
 
 //       ************************************** List tile ***********************************
         expandableListView = (ExpandableListView) view.findViewById(R.id.expandableListView);
-        expandableListDetail = ExpandableListDataItems.getData(context, paypalOrder.getPurchaseUnits());
+        expandableListDetail = ExpandableListDataItems.getData(context, paypalOrder.getPurchase_units());
         expandableListTitle = new ArrayList<String>(expandableListDetail.keySet());
         expandableListAdapter = new CustomExpandableListAdapter(context, expandableListTitle, expandableListDetail);
         expandableListView.setAdapter(expandableListAdapter);
 
-        expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-            @Override
-            public void onGroupExpand(int groupPosition) {
-                Toast.makeText(context,
-                        expandableListTitle.get(groupPosition) + " List Expanded.",
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
+//        expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+//            @Override
+//            public void onGroupExpand(int groupPosition) {
+//                Toast.makeText(context,
+//                        expandableListTitle.get(groupPosition) + " List Expanded.",
+//                        Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
-        expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
-
-            @Override
-            public void onGroupCollapse(int groupPosition) {
-                Toast.makeText(context,
-                        expandableListTitle.get(groupPosition) + " List Collapsed.",
-                        Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-        expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v,
-                                        int groupPosition, int childPosition, long id) {
-                Toast.makeText(
-                        context,
-                        expandableListTitle.get(groupPosition)
-                                + " -> "
-                                + expandableListDetail.get(
-                                expandableListTitle.get(groupPosition)).get(
-                                childPosition), Toast.LENGTH_SHORT
-                ).show();
-                return false;
-            }
-        });
+//        expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
+//
+//            @Override
+//            public void onGroupCollapse(int groupPosition) {
+//                Toast.makeText(context,
+//                        expandableListTitle.get(groupPosition) + " List Collapsed.",
+//                        Toast.LENGTH_SHORT).show();
+//
+//            }
+//        });
 
 //        *******************************************
 
@@ -170,8 +184,13 @@ public class BottomSheetLibrary {
             @NonNull String accessToken,
             @NonNull String paypalRequestId ,
             @NonNull String orderId,
-            @NonNull String url
+            @NonNull String url,
+            @NonNull LinearLayout layoutOfButtons,
+            @NonNull LinearLayout layoutOfLoading
     ) {
+
+        layoutOfButtons.setVisibility(View.GONE);
+        layoutOfLoading.setVisibility(View.VISIBLE);
 
         // Instance to log the url and data retrofit
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
@@ -208,16 +227,25 @@ public class BottomSheetLibrary {
         // Doing the request to capture the money
         Call<Void> retrofitCall = apiService.captureOrder(orderId);
 
-
         retrofitCall.enqueue(new Callback<Void>() {
+
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    isSuccess = true;
+                    layoutOfButtons.setVisibility(View.VISIBLE);
+                    layoutOfLoading.setVisibility(View.GONE);
+
+//                    listener.onSuccessCapture("success");
+
                 } else {
+                    layoutOfButtons.setVisibility(View.VISIBLE);
+                    layoutOfLoading.setVisibility(View.GONE);
+
+
                     Gson gson = new Gson();
                     ErrorInterceptor message = gson.fromJson(response.errorBody().charStream(), ErrorInterceptor.class);
                     Log.d("onResponse", message.getMessage());
+//                    listener.onErrorCapture("error");
                 }
 
 
@@ -225,11 +253,21 @@ public class BottomSheetLibrary {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
+                layoutOfButtons.setVisibility(View.VISIBLE);
+                layoutOfLoading.setVisibility(View.GONE);
+
+
                 Log.d("onFailure", t.getMessage());
 //                    result.error("error", t.getMessage(), t.getMessage());
+                listener.onErrorCapture(t.getMessage());
+
             }
         });
 
     }
+
+
+
+
 
 }

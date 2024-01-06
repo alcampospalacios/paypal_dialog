@@ -8,4 +8,7 @@
     <string name="summary">Total</string>
     <string name="pay_button">Pagar</string>
     <string name="cancel_button">Cancelar</string>
+    <string name="loading_indicator_message">Espere un momento mientras el pago se está capturando.</string>
+    <string name="loading_indicator_title">Cargando</string>
+    <string name="order_confirmed">Orden confirmada!</string>
 </resources>

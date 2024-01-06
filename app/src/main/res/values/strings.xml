@@ -8,5 +8,10 @@
     <string name="summary">Summary</string>
     <string name="pay_button">Pay</string>
     <string name="cancel_button">Cancel</string>
+    <string name="loading_indicator_message">Please wait a moment while the payment is being captured.</string>
+    <string name="loading_indicator_title">Loading</string>
+    <string name="order_confirmed">Order confirmed!</string>
+
+
 
 </resources>

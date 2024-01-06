@@ -7,12 +7,52 @@
     android:layout_height="match_parent">
 
 
+    <LinearLayout
+        android:id="@+id/layoutOfLoading001"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:padding="16dp"
+        >
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+        <com.alcampospalacios.paypal_dialog.LoadingDots
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            app:LoadingDots_auto_play="true"
+
+            app:LoadingDots_dots_color="@android:color/holo_blue_light"
+            app:LoadingDots_dots_count="3"
+            app:LoadingDots_dots_size="30dp"
+            app:LoadingDots_dots_space="10dp"
+
+            app:LoadingDots_loop_duration="1000"
+            app:LoadingDots_loop_start_delay="200"
+
+            app:LoadingDots_jump_duration="300"
+            app:LoadingDots_jump_height="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"
+            android:text="@string/loading_indicator_message"
+            android:gravity="center"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/layoutOfButtons001"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
 
     <Space
         android:layout_width="0dp"
@@ -142,11 +182,12 @@
 
         android:layout_marginTop="16dp">
         <TextView
+            android:id="@+id/summary001"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="8dp"
-            android:text="Summary"
+            android:text="@string/summary"
             android:textSize="16sp"
             android:textStyle="bold"
             />
@@ -157,11 +198,11 @@
             android:layout_weight="1"/>
 
         <TextView
+            android:id="@+id/summaryValue001"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="8dp"
-            android:text="35.00$"
             android:textSize="16sp" />
 
     </LinearLayout>
@@ -178,8 +219,10 @@
         android:layout_height="48dp"
         />
 
+
     <!-- Botones Pagar y Cancelar -->
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
