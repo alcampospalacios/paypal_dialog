@@ -274,11 +274,9 @@ public class BottomSheetLibrary {
                     layoutOfLoading.setVisibility(View.GONE);
 
 
-                    Gson gson = new Gson();
-                    ErrorInterceptor message = gson.fromJson(response.errorBody().charStream(), ErrorInterceptor.class);
-                    Log.d("onResponse", message.getMessage());
 
-                    listener.onErrorCapture("error");
+                    Log.d("onResponse", response.errorBody().toString());
+                    listener.onErrorCapture(response.errorBody().toString());
                 }
 
 
@@ -300,9 +298,5 @@ public class BottomSheetLibrary {
         });
 
     }
-
-
-
-
 
 }
