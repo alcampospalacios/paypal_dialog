@@ -88,9 +88,9 @@ public class LoadingDots extends LinearLayout {
 
         mDotsColor = a.getColor(R.styleable.LoadingDots_LoadingDots_dots_color, Color.GRAY);
 
-        color_paypal_first = getResources().getColor(R.color.paypal_one_color);
-        color_paypal_second = getResources().getColor(R.color.paypal_second_color);
-        color_paypal_third = getResources().getColor(R.color.paypal_third_color);
+        color_paypal_first = context.getColor(R.color.paypal_one_color);
+        color_paypal_second = context.getColor(R.color.paypal_second_color);
+        color_paypal_third = context.getColor(R.color.paypal_third_color);
 
         mDotsCount = a.getInt(R.styleable.LoadingDots_LoadingDots_dots_count, DEFAULT_DOTS_COUNT);
         mDotSize = a.getDimensionPixelSize(R.styleable.LoadingDots_LoadingDots_dots_size,

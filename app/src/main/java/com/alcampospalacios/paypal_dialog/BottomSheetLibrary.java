@@ -69,6 +69,18 @@ public class BottomSheetLibrary {
         checkIcon.setImageResource(R.drawable.ic_circle_check);
         checkIcon.setColorFilter(ContextCompat.getColor(context, R.color.check_color));
 
+        // Icono de error
+        ImageView errorIcon = view.findViewById(R.id.ic_circle_error_001);
+        errorIcon.setImageResource(R.drawable.ic_circle_error);
+        errorIcon.setColorFilter(ContextCompat.getColor(context, R.color.error_color));
+
+        // Icono de check confirmed
+        ImageView checkIconConfirmed = view.findViewById(R.id.ic_circle_check_confirmed_001);
+        checkIconConfirmed.setImageResource(R.drawable.ic_circle_check);
+        checkIconConfirmed.setColorFilter(ContextCompat.getColor(context, R.color.teal_700));
+
+
+
         // Texto "Orden completada"
         TextView completedText = view.findViewById(R.id.completedText);
         completedText.setText(context.getString(R.string.order_approved));
@@ -102,10 +114,20 @@ public class BottomSheetLibrary {
         cancelButton.setText(context.getString(R.string.cancel_button));
 
 
-        LinearLayout layoutOfButtons = (LinearLayout) view.findViewById(R.id.layoutOfButtons001);
+        LinearLayout layoutOfOrderApproved = (LinearLayout) view.findViewById(R.id.orderApproved001);
+
+        LinearLayout layoutOfSectionApproved = (LinearLayout) view.findViewById(R.id.orderSection01);
 
         LinearLayout layoutOfLoading = (LinearLayout) view.findViewById(R.id.layoutOfLoading001);
         layoutOfLoading.setVisibility(View.GONE);
+
+        LinearLayout layoutOfError = (LinearLayout) view.findViewById(R.id.layoutOfError001);
+        layoutOfError.setVisibility(View.GONE);
+
+        LinearLayout layoutPaymentConfirmed = (LinearLayout) view.findViewById(R.id.layoutPaymentConfirmed01);
+        layoutPaymentConfirmed.setVisibility(View.GONE);
+
+
 
 
         // Set an OnClickListener for the payButton
@@ -119,8 +141,11 @@ public class BottomSheetLibrary {
                         paypalRequestId,
                         orderId,
                         url,
-                        layoutOfButtons,
-                        layoutOfLoading
+                        layoutOfOrderApproved,
+                        layoutOfSectionApproved,
+                        layoutOfLoading,
+                        layoutOfError,
+                        layoutPaymentConfirmed
                 );
             }
         });
@@ -185,11 +210,14 @@ public class BottomSheetLibrary {
             @NonNull String paypalRequestId ,
             @NonNull String orderId,
             @NonNull String url,
-            @NonNull LinearLayout layoutOfButtons,
-            @NonNull LinearLayout layoutOfLoading
+            @NonNull LinearLayout layoutOfOrder,
+            @NonNull LinearLayout layoutOfSection,
+            @NonNull LinearLayout layoutOfLoading,
+            @NonNull LinearLayout layoutOfError,
+            @NonNull LinearLayout layoutOfPaymentConfirmed
     ) {
 
-        layoutOfButtons.setVisibility(View.GONE);
+        layoutOfOrder.setVisibility(View.GONE);
         layoutOfLoading.setVisibility(View.VISIBLE);
 
         // Instance to log the url and data retrofit
@@ -232,20 +260,25 @@ public class BottomSheetLibrary {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    layoutOfButtons.setVisibility(View.VISIBLE);
+                    layoutOfOrder.setVisibility(View.GONE);
+                    layoutOfError.setVisibility(View.GONE);
                     layoutOfLoading.setVisibility(View.GONE);
+                    layoutOfPaymentConfirmed.setVisibility(View.VISIBLE);
 
-//                    listener.onSuccessCapture("success");
+                    listener.onSuccessCapture("success");
 
                 } else {
-                    layoutOfButtons.setVisibility(View.VISIBLE);
+                    layoutOfOrder.setVisibility(View.VISIBLE);
+                    layoutOfError.setVisibility(View.VISIBLE);
+                    layoutOfSection.setVisibility(View.GONE);
                     layoutOfLoading.setVisibility(View.GONE);
 
 
                     Gson gson = new Gson();
                     ErrorInterceptor message = gson.fromJson(response.errorBody().charStream(), ErrorInterceptor.class);
                     Log.d("onResponse", message.getMessage());
-//                    listener.onErrorCapture("error");
+
+                    listener.onErrorCapture("error");
                 }
 
 
@@ -253,7 +286,9 @@ public class BottomSheetLibrary {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                layoutOfButtons.setVisibility(View.VISIBLE);
+                layoutOfOrder.setVisibility(View.VISIBLE);
+                layoutOfError.setVisibility(View.VISIBLE);
+                layoutOfSection.setVisibility(View.GONE);
                 layoutOfLoading.setVisibility(View.GONE);
 
 
