@@ -16,6 +16,11 @@ public class PayPalCallBackDialogHelper implements PaypalDialogListener {
     }
 
     @Override
+    public void onSuccessConfirmedPayment() {
+
+    }
+
+    @Override
     public void onErrorCapture(String s) {
 
     }

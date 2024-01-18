@@ -45,6 +45,8 @@ public class BottomSheetLibrary {
     static List<String> expandableListTitle;
     static HashMap<String, List<String>> expandableListDetail;
 
+    static BottomSheetDialog bottomSheetDialog;
+
     // Listeners
     static PaypalDialogListener listener;
 
@@ -59,7 +61,7 @@ public class BottomSheetLibrary {
             ) {
         listener = paypalDialogListener;
 
-        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context,  R.style.FullScreenBottomSheetDialog);
+        bottomSheetDialog = new BottomSheetDialog(context,  R.style.FullScreenBottomSheetDialog);
         BottomSheetBehavior<View> bottomSheetBehavior;
         View view = LayoutInflater.from(context).inflate(R.layout.bottom_sheet_layout, null);
         view.setBackgroundColor(Color.WHITE);
@@ -107,11 +109,14 @@ public class BottomSheetLibrary {
         TextView summaryText = view.findViewById(R.id.summaryValue001);
         summaryText.setText(paypalOrder.getTotal());
 
-        // Botones Pagar y Cancelar
+        // Button pay and cancel
         Button payButton = view.findViewById(R.id.payButton);
         payButton.setText(context.getString(R.string.pay_button));
         Button cancelButton = view.findViewById(R.id.cancelButton);
         cancelButton.setText(context.getString(R.string.cancel_button));
+
+        // Button of confirmed section go to business
+        Button goToBusiness = view.findViewById(R.id.goToBusiness);
 
 
         LinearLayout layoutOfOrderApproved = (LinearLayout) view.findViewById(R.id.orderApproved001);
@@ -156,6 +161,17 @@ public class BottomSheetLibrary {
             @Override
             public void onClick(View view) {
                 listener.onCancelPayOrder();
+                bottomSheetDialog.dismiss();
+            }
+        });
+
+
+        // Set an OnClickListener for the goToBusiness button
+        goToBusiness.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onSuccessConfirmedPayment();
+                bottomSheetDialog.dismiss();
             }
         });
 
