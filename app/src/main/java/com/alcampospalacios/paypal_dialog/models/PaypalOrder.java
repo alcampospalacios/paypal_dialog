@@ -12,6 +12,7 @@ public class PaypalOrder {
 
      double amountOrder;
      double amountShipping;
+     double totalTax;
      String currencyCode;
 
     public PaypalOrder(
@@ -43,16 +44,19 @@ public class PaypalOrder {
 
     public String getTotalValueOfItems() {
         double amount = 0.0;
+        double tax = 0.0;
         String currencyCode = "";
         for (PurchaseUnit purchaseUnit : purchase_units) {
             if (purchaseUnit.getAmount().getBreakdown().existItemTotal()) {
                 amount += Double.parseDouble(purchaseUnit.getAmount().getBreakdown().getItem_total().getValue());
+                tax += Double.parseDouble(purchaseUnit.getAmount().getBreakdown().getTax_total().getValue());
                 currencyCode = purchaseUnit.getAmount().getBreakdown().getItem_total().getCurrency_code();
 
             }
         }
 
         amountOrder = amount;
+        totalTax = tax;
         this.currencyCode = currencyCode;
         return String.valueOf(amount) + " " + currencyCode;
     }
@@ -72,9 +76,13 @@ public class PaypalOrder {
         return String.valueOf(amount)+ " " + currencyCode;
     }
 
+    public String getTotalTax() {
+        return String.valueOf(totalTax) + " " + currencyCode;
+    }
+
     public String getTotal() {
         double total = 0.0;
-        total =  amountOrder + amountShipping;
+        total =  amountOrder + amountShipping + totalTax;
         return String.valueOf(total) + " " + currencyCode;
     }
 }

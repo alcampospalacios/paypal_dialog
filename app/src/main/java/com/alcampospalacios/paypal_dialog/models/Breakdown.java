@@ -5,13 +5,16 @@ import androidx.annotation.NonNull;
 public class Breakdown {
     private ItemTotal item_total;
     private ItemTotal shipping;
+    private ItemTotal tax_total;
 
     public Breakdown(
             @NonNull ItemTotal item_total,
-            ItemTotal shipping
+            ItemTotal shipping,
+            ItemTotal tax_total
     ) {
         this.item_total = item_total;
         this.shipping = shipping;
+        this.tax_total = tax_total;
     };
 
     public ItemTotal getItem_total() { return item_total; }
@@ -27,4 +30,7 @@ public class Breakdown {
     public Boolean existItemTotal() {
         return item_total != null;
     }
+
+    public ItemTotal getTax_total() { return tax_total; }
+    public void setTax_total(ItemTotal value) { this.tax_total = value; }
 }

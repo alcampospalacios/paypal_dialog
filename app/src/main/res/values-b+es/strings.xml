@@ -16,5 +16,6 @@
     <string name="payment_successfully">Pago satisfactorio!!!</string>
     <string name="payment_successfully_details">El pago fue capturado satisfactoriamente, ahora puede volver al negocio. Tenga un buen día.</string>
     <string name="go_to_business">Volver al negocio</string>
+    <string name="tax_total">Total de impuestos</string>
 
 </resources>

@@ -109,6 +109,9 @@ public class BottomSheetLibrary {
         TextView summaryText = view.findViewById(R.id.summaryValue001);
         summaryText.setText(paypalOrder.getTotal());
 
+        TextView taxTotal = view.findViewById(R.id.totalTaxTextValue001);
+        taxTotal.setText(paypalOrder.getTotalTax());
+
         // Button pay and cancel
         Button payButton = view.findViewById(R.id.payButton);
         payButton.setText(context.getString(R.string.pay_button));

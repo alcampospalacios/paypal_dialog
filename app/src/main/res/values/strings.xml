@@ -16,6 +16,8 @@
     <string name="payment_successfully">Payment successfully!!!</string>
     <string name="payment_successfully_details">The payment was captured successfully, now you can return to merchant. Have a good day.</string>
     <string name="go_to_business">Go to business</string>
+    <string name="tax_total">Tax total</string>
+
 
 
 

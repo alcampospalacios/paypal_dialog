@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
         // To test library
         Breakdown breakdown = new Breakdown(new ItemTotal("USD", "40.00"),
-                new ItemTotal("USD", "10.00"));
+                new ItemTotal("USD", "10.00"), new ItemTotal("USD", "10.00"));
         Amount amount = new Amount(
                 "USD",
                 "50.00",
