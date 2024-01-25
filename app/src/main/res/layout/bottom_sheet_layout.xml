@@ -6,12 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
 
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     android:id="@+id/bottom_sheet_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+
 
 
 <!--    ************************************** Loading layout *********************************************-->
@@ -27,7 +29,6 @@
         >
 
         <com.alcampospalacios.paypal_dialog.LoadingDots
-            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
@@ -152,7 +153,7 @@
 
             <Space
                 android:layout_width="0dp"
-                android:layout_height="32dp"
+                android:layout_height="64dp"
                 />
 
             <!-- Icono de check -->
@@ -192,7 +193,7 @@
 
             <!--    ******************* List of expandable items ********-->
             <!--    List expandable -->
-            <ExpandableListView
+            <com.alcampospalacios.paypal_dialog.NonScrollExpandableListView
                 android:id="@+id/expandableListView"
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
@@ -453,3 +454,4 @@
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
+    </androidx.core.widget.NestedScrollView>
