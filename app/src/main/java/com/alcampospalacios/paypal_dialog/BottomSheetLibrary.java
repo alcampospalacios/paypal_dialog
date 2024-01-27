@@ -173,7 +173,6 @@ public class BottomSheetLibrary {
         goToBusiness.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.onSuccessConfirmedPayment();
                 bottomSheetDialog.dismiss();
             }
         });

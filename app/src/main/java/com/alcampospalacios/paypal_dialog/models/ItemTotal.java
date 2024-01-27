@@ -6,6 +6,8 @@ public class ItemTotal {
     private String currency_code;
     private String value;
 
+    public ItemTotal() {}
+
     public ItemTotal(
             @NonNull String currency_code,
             @NonNull String value

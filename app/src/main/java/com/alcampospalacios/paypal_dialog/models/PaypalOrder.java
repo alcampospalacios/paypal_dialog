@@ -15,6 +15,8 @@ public class PaypalOrder {
      double totalTax;
      String currencyCode;
 
+     public PaypalOrder(){}
+
     public PaypalOrder(
             @NonNull String id,
             @NonNull String intent,
@@ -29,6 +31,17 @@ public class PaypalOrder {
         this.amountShipping = 0.0;
         this.currencyCode = "";
     };
+
+    public static PaypalOrder getEmptyOrder() {
+        ArrayList<PurchaseUnit> temp = new ArrayList<PurchaseUnit>();
+        PaypalOrder paypalOrder = new PaypalOrder(
+                "",
+                "",
+                "",
+                  temp
+        );
+        return paypalOrder;
+    }
 
     public String getID() { return id; }
     public void setID(String value) { this.id = value; }

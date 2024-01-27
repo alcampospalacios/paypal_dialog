@@ -7,6 +7,8 @@ public class Breakdown {
     private ItemTotal shipping;
     private ItemTotal tax_total;
 
+    public Breakdown(){}
+
     public Breakdown(
             @NonNull ItemTotal item_total,
             ItemTotal shipping,

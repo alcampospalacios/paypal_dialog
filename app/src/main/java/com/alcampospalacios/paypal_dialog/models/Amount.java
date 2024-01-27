@@ -7,6 +7,8 @@ public class Amount {
     private String value;
     private Breakdown breakdown;
 
+    public Amount(){}
+
     public Amount(
             @NonNull String currency_code,
             @NonNull String value,

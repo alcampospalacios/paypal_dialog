@@ -8,6 +8,8 @@ public class Item {
     private String quantity;
     private String description;
 
+    public Item() {}
+
     public Item(
             @NonNull String name,
             @NonNull ItemTotal unit_amount,

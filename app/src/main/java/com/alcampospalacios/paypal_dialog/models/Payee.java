@@ -6,6 +6,8 @@ public class Payee {
     private String email_address;
     private String merchant_id;
 
+    public Payee() {}
+
     public Payee(
             @NonNull String email_address,
             @NonNull String merchant_id

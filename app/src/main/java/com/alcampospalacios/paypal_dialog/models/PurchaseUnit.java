@@ -10,6 +10,8 @@ public class PurchaseUnit {
     private Payee payee;
     private ArrayList<Item>  items;
 
+    public PurchaseUnit(){}
+
     public PurchaseUnit(
             @NonNull String reference_id,
             @NonNull Amount amount,
