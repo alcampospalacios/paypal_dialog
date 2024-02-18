@@ -1,200 +1,427 @@
 
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
 
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/parent_scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     android:id="@+id/bottom_sheet_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
 
-    <Space
-        android:layout_width="0dp"
-        android:layout_height="64dp"
-        />
-
-    <!-- Icono de check -->
-    <ImageView
-        android:id="@+id/checkIcon"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
-
-        android:layout_gravity="center_horizontal"/>
-
-    <!-- Texto "Orden completada" -->
-    <TextView
-        android:id="@+id/completedText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="8dp"
-        android:textStyle="bold"
-        />
-
-    <!-- Texto "Número de orden: xxx" -->
-    <TextView
-        android:id="@+id/orderNumberText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="8dp"
-        />
-
-    <Space
-        android:layout_width="0dp"
-        android:layout_height="30dp"
-        />
-
-<!--**********    First line from data section *************-->
-
-<!--    ******************* List of expandable items ********-->
-<!--    List expandable -->
-
-
-
-        <ExpandableListView
-            android:id="@+id/expandableListView"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
-            android:divider="@android:color/transparent"
-            android:dividerHeight="0dp"
-            android:layoutDirection="rtl"
-            />
-
-
-
-
-
-
-
-
-
-
-
-<!-- ************************************************************-->
-
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/order_number_color"
-        />
-
+<!--    ************************************** Loading layout *********************************************-->
     <LinearLayout
+        android:id="@+id/layoutOfLoading001"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:padding="16dp"
+        >
 
-        android:layout_marginTop="16dp">
-        <TextView
+        <com.alcampospalacios.paypal_dialog.LoadingDots
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"
-            android:text="Order"
-            android:textSize="14sp" />
 
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            app:LoadingDots_auto_play="true"
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"
-            android:text="28.00$"
-            android:textSize="14sp" />
+            app:LoadingDots_dots_color="@android:color/holo_blue_light"
+            app:LoadingDots_dots_count="3"
+            app:LoadingDots_dots_size="30dp"
+            app:LoadingDots_dots_space="10dp"
 
-    </LinearLayout>
+            app:LoadingDots_loop_duration="1000"
+            app:LoadingDots_loop_start_delay="200"
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-
-        android:layout_marginTop="16dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"
-            android:text="Delivery"
-            android:textSize="14sp" />
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            app:LoadingDots_jump_duration="300"
+            app:LoadingDots_jump_height="10dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"
-            android:text="7.00$"
-            android:textSize="14sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-
-        android:layout_marginTop="16dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"
-            android:text="Summary"
             android:textSize="16sp"
-            android:textStyle="bold"
+            android:layout_marginTop="8dp"
+            android:text="@string/loading_indicator_message"
+            android:gravity="center"
             />
+    </LinearLayout>
+    <!--    ***********************************************************************************-->
+
+
+    <!--***************************************** Success confirmed payment ***********************************************-->
+    <LinearLayout
+        android:id="@+id/layoutPaymentConfirmed01"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <Space
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_height="64dp"
+            />
+
+        <!-- Icono de check -->
+        <ImageView
+            android:id="@+id/ic_circle_check_confirmed_001"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:layout_gravity="center_horizontal"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="24sp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="8dp"
-            android:text="35.00$"
-            android:textSize="16sp" />
+            android:textStyle="bold"
+            android:textColor="@color/teal_700"
+            android:text="@string/payment_successfully"
+            />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+
+            android:layout_marginTop="16dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:text="@string/payment_successfully_details"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                />
+
+
+        </LinearLayout>
+
+
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    />
+
+
+
+        <Button
+            android:id="@+id/goToBusiness"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:backgroundTint="@android:color/black"
+            android:textColor="@android:color/white"
+            android:text="@string/go_to_business"
+            />
+
+
 
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/order_number_color"/>
-    <!--******************    End data section ******************-->
+
+    <!--*******************************************************************************************************************-->
 
 
-    <Space
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        />
 
-    <!-- Botones Pagar y Cancelar -->
     <LinearLayout
+        android:id="@+id/orderApproved001"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+<!-- ************************************************* Approved section *************************************** -->
+        <LinearLayout
+            android:id="@+id/orderSection01"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="64dp"
+                />
+
+            <!-- Icono de check -->
+            <ImageView
+                android:id="@+id/checkIcon"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+
+                android:layout_gravity="center_horizontal"/>
+
+            <!-- Texto "Orden completada" -->
+            <TextView
+                android:id="@+id/completedText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:textStyle="bold"
+                />
+
+            <!-- Texto "Número de orden: xxx" -->
+            <TextView
+                android:id="@+id/orderNumberText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                />
+
+
+            <!--    ******************* List of expandable items ********-->
+            <!--    List expandable -->
+            <com.alcampospalacios.paypal_dialog.NonScrollExpandableListView
+                android:id="@+id/expandableListView"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
+                android:divider="@android:color/transparent"
+                android:dividerHeight="0dp"
+                android:layoutDirection="rtl"
+                />
+
+            <!-- ************************************************************-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/order_number_color"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+
+                android:layout_marginTop="16dp">
+                <TextView
+                    android:id="@+id/orderText001"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    android:textSize="14sp" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/orderValue001"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+
+                android:layout_marginTop="16dp">
+                <TextView
+                    android:id="@+id/deliveryText001"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    android:textSize="14sp" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/deliveryTextValue001"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+
+                android:layout_marginTop="16dp">
+                <TextView
+                    android:id="@+id/totalTaxText001"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    android:textSize="14sp"
+                    android:text="@string/tax_total"
+                    />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/totalTaxTextValue001"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+
+                android:layout_marginTop="16dp">
+                <TextView
+                    android:id="@+id/summary001"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/summary"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/summaryValue001"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/order_number_color"/>
+            <!--******************    End data section ******************-->
+
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                />
+
+
+        </LinearLayout>
+<!-- ********************************************************************************************************** -->
+
+
+<!--******************** Error layour *****************************-->
+
+        <LinearLayout
+            android:id="@+id/layoutOfError001"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="64dp"
+                />
+
+            <!-- Icono de check -->
+            <ImageView
+                android:id="@+id/ic_circle_error_001"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:layout_gravity="center_horizontal"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:textStyle="bold"
+                android:textColor="@color/error_color"
+                android:text="@string/error_payment"
+                />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+
+                android:layout_marginTop="16dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/error_payment_details"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    />
+
+
+            </LinearLayout>
+
+
+
+            <!--        <Space-->
+            <!--            android:layout_width="0dp"-->
+            <!--            android:layout_height="48dp"-->
+            <!--            />-->
+
+
+
+        </LinearLayout>
+<!--*******************************************************************************************************************-->
+
+
+        <!-- Botones Pagar y Cancelar -->
+    <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_gravity="bottom"
         android:layout_marginTop="16dp">
 
         <Button
@@ -203,19 +430,18 @@
             android:layout_height="60dp"
             android:backgroundTint="@android:color/black"
             android:textColor="@android:color/white"
-            android:text="Pay Now"
+            style="?attr/materialButtonOutlinedStyle"
+            android:text="@string/pay_button"
             />
 
         <Button
             android:id="@+id/cancelButton"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-
             android:textColor="@android:color/black"
             android:layout_marginTop="5dp"
             style="?attr/materialButtonOutlinedStyle"
-
-            android:text="Cancel"
+            android:text="@string/cancel_button"
         />
 
     </LinearLayout>
@@ -229,3 +455,4 @@
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
+    </androidx.core.widget.NestedScrollView>

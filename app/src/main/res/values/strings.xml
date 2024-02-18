@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">paypal_dialog</string>
+    <string name="order_number">Order number:</string>
+    <string name="order_approved">Order approved!</string>
+    <string name="ordered_items">Ordered items</string>
+    <string name="order">Order</string>
+    <string name="delivery">Delivery</string>
+    <string name="summary">Summary</string>
+    <string name="pay_button">Pay</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="loading_indicator_message">Please wait a moment while the payment is being captured.</string>
+    <string name="loading_indicator_title">Loading</string>
+    <string name="order_confirmed">Order confirmed!</string>
+    <string name="error_payment">Error payment!</string>
+    <string name="error_payment_details">There has been a error while the payment was being processing, please try again.</string>
+    <string name="payment_successfully">Payment successfully!!!</string>
+    <string name="payment_successfully_details">The payment was captured successfully, now you can return to merchant. Have a good day.</string>
+    <string name="go_to_business">Go to business</string>
+    <string name="tax_total">Tax total</string>
+
+
+
+
+
+
 </resources>

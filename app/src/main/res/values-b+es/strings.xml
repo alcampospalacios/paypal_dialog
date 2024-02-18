@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">paypal_dialog</string>
+    <string name="order_approved">Orden aprovada!</string>
+    <string name="order_number">Número de orden:</string>
+    <string name="ordered_items">Artículos ordenados</string>
+    <string name="order">Orden</string>
+    <string name="delivery">Entrega</string>
+    <string name="summary">Total</string>
+    <string name="pay_button">Pagar</string>
+    <string name="cancel_button">Cancelar</string>
+    <string name="loading_indicator_message">Espere un momento mientras el pago se está capturando.</string>
+    <string name="loading_indicator_title">Cargando</string>
+    <string name="order_confirmed">Orden confirmada!</string>
+    <string name="error_payment">Error en pago!</string>
+    <string name="error_payment_details">Ha habido un error mientras se procesaba el pago, por favor intente de nuevo.</string>
+    <string name="payment_successfully">Pago satisfactorio!!!</string>
+    <string name="payment_successfully_details">El pago fue capturado satisfactoriamente, ahora puede volver al negocio. Tenga un buen día.</string>
+    <string name="go_to_business">Volver al negocio</string>
+    <string name="tax_total">Total de impuestos</string>
+
+</resources>
