@@ -430,6 +430,7 @@
             android:layout_height="60dp"
             android:backgroundTint="@android:color/black"
             android:textColor="@android:color/white"
+            style="?attr/materialButtonOutlinedStyle"
             android:text="@string/pay_button"
             />
 
