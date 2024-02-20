@@ -21,7 +21,6 @@ android {
     compileSdk 33
 
     defaultConfig {
-//        applicationId "com.alcampospalacios.paypal_dialog"
         minSdk 23
         targetSdk 33
         versionCode 1

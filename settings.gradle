@@ -12,5 +12,4 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "paypal_dialog"
-include ':app'
+
